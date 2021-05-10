@@ -4,19 +4,17 @@ const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const dbConfig = require("./config/db");
+const config = require("./config/db");
 
 const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
 
-const uri = dbConfig.URI;
-
 //configure database and mongoose
 mongoose.set("useCreateIndex", true);
 mongoose
-    .connect(uri, { useNewUrlParser: true })
+    .connect(config.database, { useNewUrlParser: true })
     .then(() => {
         console.log("Database is connected");
     })
