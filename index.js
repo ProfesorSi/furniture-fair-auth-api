@@ -1,18 +1,22 @@
 const express = require("express");
-// const PORT = process.env.PORT || 5000;
-const PORT = 5000;
+const PORT = process.env.PORT || 4000;
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const config = require("./config/db");
+const dbConfig = require("./config/db");
+
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
+
+const uri = dbConfig.URI;
 
 //configure database and mongoose
 mongoose.set("useCreateIndex", true);
 mongoose
-    .connect(config.database, { useNewUrlParser: true })
+    .connect(uri, { useNewUrlParser: true })
     .then(() => {
         console.log("Database is connected");
     })
